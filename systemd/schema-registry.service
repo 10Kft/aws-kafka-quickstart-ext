@@ -1,0 +1,14 @@
+[Unit]
+Description=Confluent Schema Registry
+After=network.target remote-fs.target kafka.service
+
+[Service]
+Type=forking
+User=root
+Group=root
+Environment="LOG_DIR=/var/log/schema-registry"
+ExecStart=/opt/confluent/bin/schema-registry-start -daemon /opt/confluent/etc/schema-registry/schema-registry.properties
+ExecStop=/opt/confluent/bin/schema-registry-stop
+
+[Install]
+WantedBy=multi-user.target

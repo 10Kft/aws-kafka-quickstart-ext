@@ -1,0 +1,13 @@
+[Unit]
+Description=Kafka REST proxy
+After=network.target network-online.target remote-fs.target zookeeper.service
+
+[Service]
+Type=forking
+User=root
+Group=root
+Environment="LOG_DIR=/var/log/kafka-rest"
+ExecStart=/opt/confluent/bin/kafka-rest-start -daemon /opt/confluent/etc/kafka-rest/kafka-rest.properties
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+
+[Unit]
+Description=Kafka Connect
+After=network.target kafka.service schema-registry.service
+
+[Service]
+Type=forking
+User=root
+Group=root
+Environment="LOG_DIR=/var/log/kafka-connect"
+ExecStart=/opt/confluent/bin/connect-distributed -daemon /opt/confluent/etc/kafka/connect-distributed.properties
+
+[Install]
+WantedBy=multi-user.target
